@@ -7,7 +7,7 @@ import pro.sky.homework.exceptions.EmployeesSalaryEmptyException;
 import pro.sky.homework.exceptions.EmployeesSalaryNonPositiveException;
 
 @Component
-public class EmployeeImpl {
+public class EmployeeImpl implements Employee {
     private static Integer sequenceId = 1;
 
     private Integer id;
