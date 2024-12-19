@@ -1,4 +1,4 @@
-package pro.sky.SkyPro_Java_Homework_2024_12_16;
+package pro.sky.homework;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

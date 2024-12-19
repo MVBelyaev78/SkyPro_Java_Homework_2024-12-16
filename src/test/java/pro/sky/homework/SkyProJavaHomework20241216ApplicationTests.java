@@ -1,4 +1,4 @@
-package pro.sky.SkyPro_Java_Homework_2024_12_16;
+package pro.sky.homework;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
