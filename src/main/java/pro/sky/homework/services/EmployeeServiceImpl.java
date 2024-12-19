@@ -8,6 +8,7 @@ import pro.sky.homework.repositories.StaffRepository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -29,5 +30,12 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new EmployeeTooManyException();
         }
         return employees.get(0);
+    }
+
+    public List<Employee> getEmployeesByDepartmentId(Integer departmentId) {
+        return employeeList
+                .stream()
+                .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
+                .toList();
     }
 }

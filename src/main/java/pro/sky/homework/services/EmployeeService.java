@@ -10,4 +10,6 @@ public interface EmployeeService {
     List<Employee> getEmployeeList();
 
     Employee getEmployeeById(Integer id);
+
+    List<Employee> getEmployeesByDepartmentId(Integer departmentId);
 }

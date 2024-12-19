@@ -9,6 +9,8 @@ import pro.sky.homework.components.Employee;
 import pro.sky.homework.services.DepartmentService;
 import pro.sky.homework.services.EmployeeService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("")
 public class StaffController {
@@ -20,13 +22,28 @@ public class StaffController {
         this.departmentService = departmentService;
     }
 
+    @GetMapping(value = "/employees")
+    public List<Employee> getEmployeeList() {
+        return employeeService.getEmployeeList();
+    }
+
     @GetMapping(value = "/employee/{id}")
     public Employee getEmployeeById(@PathVariable Integer id) {
         return employeeService.getEmployeeById(id);
     }
 
+    @GetMapping(value = "/departments")
+    public List<Department> getDepartmentList() {
+        return departmentService.getDepartmentList();
+    }
+
     @GetMapping(value = "/department/{id}")
     public Department getDepartmentById(@PathVariable Integer id) {
         return departmentService.getDepartmentById(id);
+    }
+
+    @GetMapping(value = "/department/{id}/employees")
+    public List<Employee> getEmployeesByDepartmentId(@PathVariable Integer id) {
+        return employeeService.getEmployeesByDepartmentId(id);
     }
 }
