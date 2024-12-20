@@ -11,7 +11,14 @@ import java.util.Objects;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-    private final List<Department> departmentList = StaffRepository.getDepartments();
+    private List<Department> departmentList;
+
+    private DepartmentServiceImpl() {
+    }
+
+    public DepartmentServiceImpl(List<Department> departmentList) {
+        this.departmentList = departmentList;
+    }
 
     public List<Department> getDepartmentList() {
         return departmentList;
