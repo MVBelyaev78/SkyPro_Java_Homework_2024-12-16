@@ -36,42 +36,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return employees.get(0);
     }
-
-    public List<Employee> getEmployeesByDepartmentId(Integer departmentId) {
-        return employeeList
-                .stream()
-                .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
-                .toList();
-    }
-
-    public Double getSumSalaryByDepartmentId(Integer departmentId) {
-        return employeeList
-                .stream()
-                .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
-                .mapToDouble(Employee::getSalary)
-                .sum();
-
-    }
-
-    public OptionalDouble getMinSalaryByDepartmentId(Integer departmentId) {
-        return employeeList
-                .stream()
-                .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
-                .mapToDouble(Employee::getSalary)
-                .min();
-    }
-
-    public OptionalDouble getMaxSalaryByDepartmentId(Integer departmentId) {
-        return employeeList
-                .stream()
-                .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
-                .mapToDouble(Employee::getSalary)
-                .max();
-    }
-
-    public Map<Integer, List<Employee>> getMapEmployeesForDepartments() {
-        return employeeList
-                .stream()
-                .collect(Collectors.groupingBy(Employee::getDepartmentId));
-    }
 }

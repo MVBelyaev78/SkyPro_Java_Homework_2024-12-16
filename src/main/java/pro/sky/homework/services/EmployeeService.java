@@ -12,14 +12,4 @@ public interface EmployeeService {
     List<Employee> getEmployeeList();
 
     Employee getEmployeeById(Integer id);
-
-    List<Employee> getEmployeesByDepartmentId(Integer departmentId);
-
-    Double getSumSalaryByDepartmentId(Integer departmentId);
-
-    OptionalDouble getMinSalaryByDepartmentId(Integer departmentId);
-
-    OptionalDouble getMaxSalaryByDepartmentId(Integer departmentId);
-
-    Map<Integer, List<Employee>> getMapEmployeesForDepartments();
 }
