@@ -6,9 +6,8 @@ import pro.sky.homework.exceptions.EmployeeNotFoundException;
 import pro.sky.homework.exceptions.EmployeeTooManyException;
 import pro.sky.homework.repositories.StaffRepository;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.OptionalDouble;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -62,5 +61,11 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
                 .mapToDouble(Employee::getSalary)
                 .max();
+    }
+
+    public Map<Integer, List<Employee>> getMapEmployeesForDepartments() {
+        return employeeList
+                .stream()
+                .collect(Collectors.groupingBy(Employee::getDepartmentId));
     }
 }

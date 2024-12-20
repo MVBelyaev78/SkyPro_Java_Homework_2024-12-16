@@ -10,6 +10,7 @@ import pro.sky.homework.services.DepartmentService;
 import pro.sky.homework.services.EmployeeService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.OptionalDouble;
 
 @RestController
@@ -61,5 +62,10 @@ public class StaffController {
     @GetMapping(value = "/department/{id}/salary/max")
     public OptionalDouble getMaxSalaryByDepartmentId(@PathVariable Integer id) {
         return employeeService.getMaxSalaryByDepartmentId(id);
+    }
+
+    @GetMapping(value ="department/employees")
+    public Map<Integer, List<Employee>> getMapEmployeesForDepartments() {
+        return employeeService.getMapEmployeesForDepartments();
     }
 }
