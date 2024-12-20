@@ -11,7 +11,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private final List<Employee> employeeList = StaffRepository.getEmployees();
+    private List<Employee> employeeList = new ArrayList<>();
+
+    private EmployeeServiceImpl() {
+    }
+
+    public EmployeeServiceImpl(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
 
     public List<Employee> getEmployeeList() {
         return employeeList;
