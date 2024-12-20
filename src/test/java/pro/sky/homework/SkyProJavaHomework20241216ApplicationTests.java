@@ -13,8 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class SkyProJavaHomework20241216ApplicationTests {
     EmployeeService employeeService = new EmployeeServiceImpl(StaffRepository.getEmployees());
-//    DepartmentService departmentService = new DepartmentServiceImpl(StaffRepository.getDepartments(),
-//            employeeService);
 
     @Test
     void checkSearchEmployeeById() {

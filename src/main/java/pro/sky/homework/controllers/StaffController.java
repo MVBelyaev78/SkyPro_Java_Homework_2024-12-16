@@ -16,22 +16,20 @@ import java.util.OptionalDouble;
 @RestController
 @RequestMapping("")
 public class StaffController {
-    private final EmployeeService employeeService;
     private final DepartmentService departmentService;
 
-    public StaffController(EmployeeService employeeService, DepartmentService departmentService) {
-        this.employeeService = employeeService;
+    public StaffController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
 
     @GetMapping(value = "/employees")
     public List<Employee> getEmployeeList() {
-        return employeeService.getEmployeeList();
+        return departmentService.getEmployeeService().getEmployeeList();
     }
 
     @GetMapping(value = "/employee/{id}")
     public Employee getEmployeeById(@PathVariable Integer id) {
-        return employeeService.getEmployeeById(id);
+        return departmentService.getEmployeeService().getEmployeeById(id);
     }
 
     @GetMapping(value = "/departments")

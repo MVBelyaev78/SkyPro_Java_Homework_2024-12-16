@@ -29,6 +29,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentList;
     }
 
+    public EmployeeService getEmployeeService() {
+        return employeeService;
+    }
+
     public Department getDepartmentById(Integer id) {
         List<Department> departments = departmentList
                 .stream()

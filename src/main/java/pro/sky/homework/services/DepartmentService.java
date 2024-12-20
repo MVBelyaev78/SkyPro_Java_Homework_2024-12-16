@@ -10,6 +10,8 @@ import java.util.OptionalDouble;
 public interface DepartmentService {
     List<Department> getDepartmentList();
 
+    EmployeeService getEmployeeService();
+
     Department getDepartmentById(Integer id);
 
     List<Employee> getEmployeesByDepartmentId(Integer id);
