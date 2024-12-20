@@ -15,7 +15,7 @@ public class DepartmentImpl implements Department {
     private DepartmentImpl() {
     }
 
-    public static DepartmentImpl valueOf(String name) {
+    public static Department valueOf(String name) {
         if (name.isEmpty()) {
             throw new DepartmentsNameEmptyException();
         }
@@ -37,7 +37,7 @@ public class DepartmentImpl implements Department {
         return (this == object ||
                 object != null &&
                 getClass() == object.getClass() &&
-                Objects.equals(this.name, ((DepartmentImpl) object).getName()));
+                Objects.equals(this.name, ((Department) object).getName()));
     }
 
     public int hashCode() {

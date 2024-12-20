@@ -1,6 +1,7 @@
 package pro.sky.homework.services;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 import pro.sky.homework.components.Employee;
 import pro.sky.homework.exceptions.EmployeeNotFoundException;
 import pro.sky.homework.exceptions.EmployeeTooManyException;
@@ -9,6 +10,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@SessionScope
 public class EmployeeServiceImpl implements EmployeeService {
     private List<Employee> employeeList = new ArrayList<>();
 

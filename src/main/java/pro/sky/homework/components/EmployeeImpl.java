@@ -20,7 +20,7 @@ public class EmployeeImpl implements Employee {
     private EmployeeImpl() {
     }
 
-    public static EmployeeImpl valueOf(Integer departmentId, String fullName, Double salary) {
+    public static Employee valueOf(Integer departmentId, String fullName, Double salary) {
         if (departmentId == null) {
             throw new EmployeesDepartmentIdEmptyException();
         }
@@ -61,9 +61,9 @@ public class EmployeeImpl implements Employee {
         return (this == object ||
                 object != null &&
                 getClass() == object.getClass() &&
-                Objects.equals(this.departmentId, ((EmployeeImpl) object).getDepartmentId()) &&
-                Objects.equals(this.fullName, ((EmployeeImpl) object).getFullName()) &&
-                Objects.equals(this.salary, ((EmployeeImpl) object).getSalary()));
+                Objects.equals(this.departmentId, ((Employee) object).getDepartmentId()) &&
+                Objects.equals(this.fullName, ((Employee) object).getFullName()) &&
+                Objects.equals(this.salary, ((Employee) object).getSalary()));
     }
 
     public int hashCode() {

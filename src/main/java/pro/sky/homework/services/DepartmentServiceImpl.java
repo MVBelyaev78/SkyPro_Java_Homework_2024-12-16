@@ -1,6 +1,7 @@
 package pro.sky.homework.services;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 import pro.sky.homework.components.Department;
 import pro.sky.homework.components.Employee;
 import pro.sky.homework.exceptions.DepartmentNotFoundException;
@@ -13,6 +14,7 @@ import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 @Service
+@SessionScope
 public class DepartmentServiceImpl implements DepartmentService {
     private List<Department> departmentList;
     private EmployeeService employeeService;
