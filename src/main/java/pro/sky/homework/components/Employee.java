@@ -8,4 +8,8 @@ public interface Employee {
     String getFullName();
 
     Double getSalary();
+
+    boolean equals(Object object);
+
+    int hashCode();
 }

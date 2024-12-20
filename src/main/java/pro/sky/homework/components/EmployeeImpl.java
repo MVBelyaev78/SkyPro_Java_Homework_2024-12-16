@@ -59,10 +59,14 @@ public class EmployeeImpl implements Employee {
 
     public boolean equals(Object object) {
         return (this == object ||
-                object != null && getClass() == object.getClass() && Objects.equals(this, object));
+                object != null &&
+                getClass() == object.getClass() &&
+                Objects.equals(this.departmentId, ((EmployeeImpl) object).getDepartmentId()) &&
+                Objects.equals(this.fullName, ((EmployeeImpl) object).getFullName()) &&
+                Objects.equals(this.salary, ((EmployeeImpl) object).getSalary()));
     }
 
     public int hashCode() {
-        return Objects.hash(id, fullName, departmentId, salary);
+        return Objects.hash(fullName, departmentId, salary);
     }
 }

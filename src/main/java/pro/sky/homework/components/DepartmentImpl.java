@@ -3,6 +3,8 @@ package pro.sky.homework.components;
 import org.springframework.stereotype.Component;
 import pro.sky.homework.exceptions.DepartmentsNameEmptyException;
 
+import java.util.Objects;
+
 @Component
 public class DepartmentImpl implements Department {
     private static Integer sequenceId = 1;
@@ -29,5 +31,16 @@ public class DepartmentImpl implements Department {
 
     public String getName() {
         return name;
+    }
+
+    public boolean equals(Object object) {
+        return (this == object ||
+                object != null &&
+                getClass() == object.getClass() &&
+                Objects.equals(this.name, ((DepartmentImpl) object).getName()));
+    }
+
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
