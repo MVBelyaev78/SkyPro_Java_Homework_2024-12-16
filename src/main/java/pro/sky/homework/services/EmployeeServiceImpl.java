@@ -3,22 +3,18 @@ package pro.sky.homework.services;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import pro.sky.homework.components.Employee;
+import pro.sky.homework.exceptions.EmployeeIdNonUniqueException;
 import pro.sky.homework.exceptions.EmployeeNotFoundException;
 import pro.sky.homework.exceptions.EmployeeTooManyException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @SessionScope
 public class EmployeeServiceImpl implements EmployeeService {
-    private List<Employee> employeeList = new ArrayList<>();
+    private final List<Employee> employeeList = new ArrayList<>();
 
-    private EmployeeServiceImpl() {
-    }
-
-    public EmployeeServiceImpl(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public EmployeeServiceImpl() {
     }
 
     public List<Employee> getEmployeeList() {
@@ -26,10 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public Employee getEmployeeById(Integer id) {
-        List<Employee> employees = employeeList
-                .stream()
-                .filter(e -> Objects.equals(e.getId(), id))
-                .toList();
+        List<Employee> employees = getEmployeeByIdInner(id);
         if (employees.isEmpty()) {
             throw new EmployeeNotFoundException();
         }
@@ -37,5 +30,23 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new EmployeeTooManyException();
         }
         return employees.get(0);
+    }
+
+    public void addEmployee(Employee employee) {
+        if (!getEmployeeByIdInner(employee.getId()).isEmpty()) {
+            throw new EmployeeIdNonUniqueException();
+        }
+        employeeList.add(employee);
+    }
+
+    public void delEmployee(Integer employeeId) {
+        employeeList.removeAll(getEmployeeByIdInner(employeeId));
+    }
+
+    private List<Employee> getEmployeeByIdInner(Integer id) {
+        return employeeList
+                .stream()
+                .filter(e -> Objects.equals(e.getId(), id))
+                .toList();
     }
 }

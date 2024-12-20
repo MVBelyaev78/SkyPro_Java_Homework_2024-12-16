@@ -2,9 +2,9 @@ package pro.sky.homework;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import pro.sky.homework.components.Employee;
 import pro.sky.homework.components.EmployeeImpl;
 import pro.sky.homework.exceptions.EmployeeNotFoundException;
-import pro.sky.homework.repositories.StaffRepository;
 import pro.sky.homework.services.EmployeeService;
 import pro.sky.homework.services.EmployeeServiceImpl;
 
@@ -12,14 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class SkyProJavaHomework20241216ApplicationTests {
-    EmployeeService employeeService = new EmployeeServiceImpl(StaffRepository.getEmployees());
 
     @Test
     void checkSearchEmployeeById() {
-        assertEquals(EmployeeImpl.valueOf(1, "John Lennon", 2716.84d),
-                employeeService.getEmployeeById(1));
-        assertNotEquals(EmployeeImpl.valueOf(1, "John Lennon", 2716.84d),
-                employeeService.getEmployeeById(2));
+        EmployeeService employeeService = new EmployeeServiceImpl();
+        Employee emp1 = EmployeeImpl.valueOf(1, "John Lennon", 2716.84d);
+        employeeService.getEmployeeList().add(emp1);
+        employeeService
+                .getEmployeeList()
+                .add(EmployeeImpl.valueOf(1, "George Harrison", 1889.06d));
+        assertEquals(emp1, employeeService.getEmployeeById(1));
+        assertNotEquals(emp1, employeeService.getEmployeeById(2));
         assertThrows(EmployeeNotFoundException.class, () -> employeeService.getEmployeeById(-1));
     }
 
