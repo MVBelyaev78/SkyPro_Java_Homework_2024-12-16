@@ -43,38 +43,38 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departments.get(0);
     }
 
-    public List<Employee> getEmployeesByDepartmentId(Integer departmentId) {
+    public List<Employee> getEmployeesByDepartmentId(Integer id) {
         return employeeService
                 .getEmployeeList()
                 .stream()
-                .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
+                .filter(e -> Objects.equals(e.getDepartmentId(), id))
                 .toList();
     }
 
-    public Double getSumSalaryByDepartmentId(Integer departmentId) {
+    public Double getSumSalaryByDepartmentId(Integer id) {
         return employeeService
                 .getEmployeeList()
                 .stream()
-                .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
+                .filter(e -> Objects.equals(e.getDepartmentId(), id))
                 .mapToDouble(Employee::getSalary)
                 .sum();
 
     }
 
-    public OptionalDouble getMinSalaryByDepartmentId(Integer departmentId) {
+    public OptionalDouble getMinSalaryByDepartmentId(Integer id) {
         return employeeService
                 .getEmployeeList()
                 .stream()
-                .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
+                .filter(e -> Objects.equals(e.getDepartmentId(), id))
                 .mapToDouble(Employee::getSalary)
                 .min();
     }
 
-    public OptionalDouble getMaxSalaryByDepartmentId(Integer departmentId) {
+    public OptionalDouble getMaxSalaryByDepartmentId(Integer id) {
         return employeeService
                 .getEmployeeList()
                 .stream()
-                .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
+                .filter(e -> Objects.equals(e.getDepartmentId(), id))
                 .mapToDouble(Employee::getSalary)
                 .max();
     }
