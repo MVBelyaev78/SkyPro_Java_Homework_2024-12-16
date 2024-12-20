@@ -6,6 +6,8 @@ import pro.sky.homework.exceptions.EmployeesNameEmptyException;
 import pro.sky.homework.exceptions.EmployeesSalaryEmptyException;
 import pro.sky.homework.exceptions.EmployeesSalaryNonPositiveException;
 
+import java.util.Objects;
+
 @Component
 public class EmployeeImpl implements Employee {
     private static Integer sequenceId = 1;
@@ -53,5 +55,14 @@ public class EmployeeImpl implements Employee {
 
     public Double getSalary() {
         return salary;
+    }
+
+    public boolean equals(Object object) {
+        return (this == object ||
+                object != null && getClass() == object.getClass() && Objects.equals(this, object));
+    }
+
+    public int hashCode() {
+        return Objects.hash(id, fullName, departmentId, salary);
     }
 }
