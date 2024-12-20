@@ -8,7 +8,7 @@ import pro.sky.homework.repositories.StaffRepository;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
+import java.util.OptionalDouble;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -37,5 +37,30 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .stream()
                 .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
                 .toList();
+    }
+
+    public Double getSumSalaryByDepartmentId(Integer departmentId) {
+        return employeeList
+                .stream()
+                .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
+                .mapToDouble(Employee::getSalary)
+                .sum();
+
+    }
+
+    public OptionalDouble getMinSalaryByDepartmentId(Integer departmentId) {
+        return employeeList
+                .stream()
+                .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
+                .mapToDouble(Employee::getSalary)
+                .min();
+    }
+
+    public OptionalDouble getMaxSalaryByDepartmentId(Integer departmentId) {
+        return employeeList
+                .stream()
+                .filter(e -> Objects.equals(e.getDepartmentId(), departmentId))
+                .mapToDouble(Employee::getSalary)
+                .max();
     }
 }

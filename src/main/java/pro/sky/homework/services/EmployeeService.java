@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pro.sky.homework.components.Employee;
 
 import java.util.List;
+import java.util.OptionalDouble;
 
 @Service
 public interface EmployeeService {
@@ -12,4 +13,10 @@ public interface EmployeeService {
     Employee getEmployeeById(Integer id);
 
     List<Employee> getEmployeesByDepartmentId(Integer departmentId);
+
+    Double getSumSalaryByDepartmentId(Integer departmentId);
+
+    OptionalDouble getMinSalaryByDepartmentId(Integer departmentId);
+
+    OptionalDouble getMaxSalaryByDepartmentId(Integer departmentId);
 }
