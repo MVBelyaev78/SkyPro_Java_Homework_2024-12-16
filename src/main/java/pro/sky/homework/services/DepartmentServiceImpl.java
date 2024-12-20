@@ -28,7 +28,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     public List<Department> getDepartmentList() {
-        return departmentList;
+        return List.copyOf(departmentList);
     }
 
     public EmployeeService getEmployeeService() {

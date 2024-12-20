@@ -4,26 +4,41 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import pro.sky.homework.components.Employee;
 import pro.sky.homework.components.EmployeeImpl;
-import pro.sky.homework.exceptions.EmployeeNotFoundException;
+import pro.sky.homework.exceptions.EmployeeAbsentBasedOfIdException;
+import pro.sky.homework.exceptions.EmployeeDataNonUniqueException;
+import pro.sky.homework.exceptions.EmployeeIdNonUniqueException;
 import pro.sky.homework.services.EmployeeService;
 import pro.sky.homework.services.EmployeeServiceImpl;
 
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class SkyProJavaHomework20241216ApplicationTests {
-
     @Test
-    void checkSearchEmployeeById() {
+    void checkAddEmployee() {
         EmployeeService employeeService = new EmployeeServiceImpl();
         Employee emp1 = EmployeeImpl.valueOf(1, "John Lennon", 2716.84d);
-        employeeService.getEmployeeList().add(emp1);
-        employeeService
-                .getEmployeeList()
-                .add(EmployeeImpl.valueOf(1, "George Harrison", 1889.06d));
-        assertEquals(emp1, employeeService.getEmployeeById(1));
-        assertNotEquals(emp1, employeeService.getEmployeeById(2));
-        assertThrows(EmployeeNotFoundException.class, () -> employeeService.getEmployeeById(-1));
+        assertTrue(auxCheckEmployeeDataEmpty(employeeService, emp1.getId()));
+        assertDoesNotThrow(() -> employeeService.add(emp1));
+        assertFalse(auxCheckEmployeeDataEmpty(employeeService, emp1.getId()));
+        assertThrows(EmployeeIdNonUniqueException.class, () -> employeeService.add(emp1));
+        // Data in emp2 must be the same as in emp1
+        Employee emp2 = EmployeeImpl.valueOf(1, "John Lennon", 2716.84d);
+        assertThrows(EmployeeDataNonUniqueException.class, () -> employeeService.add(emp2));
+    }
+
+    @Test
+    void checkDelEmployee() {
+        EmployeeService employeeService = new EmployeeServiceImpl();
+        Employee emp1 = EmployeeImpl.valueOf(1, "John Lennon", 2716.84d);
+        employeeService.add(emp1);
+        assertFalse(auxCheckEmployeeDataEmpty(employeeService, emp1.getId()));
+        assertDoesNotThrow(() -> employeeService.del(emp1.getId()));
+        assertTrue(auxCheckEmployeeDataEmpty(employeeService, emp1.getId()));
+        assertThrows(EmployeeAbsentBasedOfIdException.class, () -> employeeService.del(emp1.getId()));
     }
 
 //    @Test
@@ -38,4 +53,13 @@ class SkyProJavaHomework20241216ApplicationTests {
 //        assertNotEquals(elExpected, departmentService.getEmployeesByDepartmentId(2));
 //        assertTrue(departmentService.getEmployeesByDepartmentId(-1).isEmpty());
 //    }
+
+    private boolean auxCheckEmployeeDataEmpty(EmployeeService employeeService, Integer employeeId) {
+        return employeeService
+                .getEmployeeList()
+                .stream()
+                .filter(e -> Objects.equals(e.getId(), employeeId))
+                .toList()
+                .isEmpty();
+    }
 }

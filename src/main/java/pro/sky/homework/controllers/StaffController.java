@@ -27,11 +27,6 @@ public class StaffController {
         return departmentService.getEmployeeService().getEmployeeList();
     }
 
-    @GetMapping(value = "/employee/{id}")
-    public Employee getEmployeeById(@PathVariable Integer id) {
-        return departmentService.getEmployeeService().getEmployeeById(id);
-    }
-
     @GetMapping(value = "/departments")
     public List<Department> getDepartmentList() {
         return departmentService.getDepartmentList();

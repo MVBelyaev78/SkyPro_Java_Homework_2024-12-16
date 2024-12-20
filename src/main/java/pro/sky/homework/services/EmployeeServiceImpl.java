@@ -3,9 +3,7 @@ package pro.sky.homework.services;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import pro.sky.homework.components.Employee;
-import pro.sky.homework.exceptions.EmployeeIdNonUniqueException;
-import pro.sky.homework.exceptions.EmployeeNotFoundException;
-import pro.sky.homework.exceptions.EmployeeTooManyException;
+import pro.sky.homework.exceptions.*;
 
 import java.util.*;
 
@@ -18,28 +16,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public List<Employee> getEmployeeList() {
-        return employeeList;
+        return List.copyOf(employeeList);
     }
 
-    public Employee getEmployeeById(Integer id) {
-        List<Employee> employees = getEmployeeByIdInner(id);
-        if (employees.isEmpty()) {
-            throw new EmployeeNotFoundException();
-        }
-        if (employees.size() > 1) {
-            throw new EmployeeTooManyException();
-        }
-        return employees.get(0);
-    }
-
-    public void addEmployee(Employee employee) {
+    public void add(Employee employee) {
         if (!getEmployeeByIdInner(employee.getId()).isEmpty()) {
             throw new EmployeeIdNonUniqueException();
+        }
+        if (!getEmployeeByDataInner(employee).isEmpty()) {
+            throw new EmployeeDataNonUniqueException();
         }
         employeeList.add(employee);
     }
 
-    public void delEmployee(Integer employeeId) {
+    public void del(Integer employeeId) {
+        if (getEmployeeByIdInner(employeeId).isEmpty()) {
+            throw new EmployeeAbsentBasedOfIdException();
+        }
         employeeList.removeAll(getEmployeeByIdInner(employeeId));
     }
 
@@ -47,6 +40,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeList
                 .stream()
                 .filter(e -> Objects.equals(e.getId(), id))
+                .toList();
+    }
+
+    private List<Employee> getEmployeeByDataInner(Employee employee) {
+        return employeeList
+                .stream()
+                .filter(e -> Objects.equals(e, employee))
                 .toList();
     }
 }

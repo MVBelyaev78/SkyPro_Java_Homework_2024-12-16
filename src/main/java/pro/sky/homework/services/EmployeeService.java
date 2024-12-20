@@ -9,9 +9,7 @@ import java.util.List;
 public interface EmployeeService {
     List<Employee> getEmployeeList();
 
-    Employee getEmployeeById(Integer id);
+    void add(Employee employee);
 
-    void addEmployee(Employee employee);
-
-    void delEmployee(Integer employeeId);
+    void del(Integer employeeId);
 }
